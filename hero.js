@@ -29,6 +29,8 @@ class Hero {
   }
 
   step() {
+    let xPrev = this.x
+    let yPrev = this.y
     // apply speed to position
     this.x += this.dx
     this.y += this.dy
@@ -39,11 +41,26 @@ class Hero {
     // apply gravity to y movement (speed up)
     this.dy += gridSize / 60
 
+    //dont let hero fall so fast they clip through ground
+    if (this.dy >= gridSize) {
+      this.dy = gridSize - 1
+    }
+
     // check if hit ground
-    let groundLevel = canvas.height - gridSize
-    if (this.y > groundLevel) {
-      this.y = groundLevel
+    let collision = undefined
+    world.forEach(ground => {
+      let wasAbove = ground.isBelow(xPrev,yPrev)
+      let nowInside = ground.contains(this.x, this.y)
+      if (wasAbove && nowInside) {
+        collision = ground
+      }
+    })
+    if (collision !== undefined) {
+      this.y = collision.y
+      this.dy = gridSize / 60
       this.airborne = false
+    } else {
+      this.airborne = true
     }
   }
 
