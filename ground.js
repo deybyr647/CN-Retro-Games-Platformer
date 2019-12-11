@@ -1,7 +1,6 @@
 
 class Ground {
   constructor(x, y, width, height) {
-    // todo
     this.x = x * gridSize
     this.y = (maxY - y) * gridSize
     this.width = width * gridSize
@@ -9,28 +8,46 @@ class Ground {
   }
 
   isBelow(x, y) {
-  	return(
-  		this.x < x &&
-  		x <  this.x + this.width &&
-  		y <= this.y)
+    return (
+      this.x < x &&
+      x < this.x + this.width &&
+      y <= this.y // equals is important here
+    )
   }
 
-  contains(x,y) {
-  	return (
-  		this.x < x &&
-  		x < this.x + this.width &&
-  		this.y < y &&
-  		y < this.y + this.height)
+  contains(x, y) {
+    return (
+      this.x < x &&
+      x < this.x + this.width &&
+      this.y < y &&
+      y < this.y + this.height
+    )
   }
 
   draw() {
-    // todo
-    ctx.fillStyle = 'darkgreen'
-    ctx.fillRect(
-    	this.x,
-    	this.y,
-    	this.width,
-    	this.height
-    	)
+
+
+    for (let row = 0; row < this.height; row += gridSize){
+      let image = groundSprite.image
+      if (row === 0) {
+        image = groundTopSprite.image
+      }
+      for (let column = 0; column < this.width; column += gridSize){
+        ctx.drawImage(
+        image,
+        this.x + column - xScroll,
+        this.y + row,
+        gridSize,
+        gridSize)
+      }
+    }
+    
+    ctx.strokeStyle = 'darkgreen'
+    ctx.strokeRect(
+      this.x - xScroll,
+      this.y,
+      this.width,
+      this.height
+    )
   }
 }

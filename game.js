@@ -1,11 +1,10 @@
-
+let xScroll = 0 
 let hero = new Hero()
 let world = [
-new Ground(2,2,18,2),
-new Ground(8,5,2,1),
-new Ground(12,7,6,1),
-new Ground(22,6,4,1),
-//new Ground(0,600,900,50),
+  new Ground(2, 2, 18, 2),
+  new Ground(8, 5, 2, 1),
+  new Ground(12, 7, 6, 3),
+  new Ground(22, 6, 4, 1),
 ]
 
 let keyPressed = {}
