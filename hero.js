@@ -4,8 +4,8 @@ class Hero {
     this.reset()
   }
 
-reset(){
-  // position
+  reset() {
+    // position
     this.x = gridSize * 3.5
     this.y = 0
 
@@ -15,9 +15,9 @@ reset(){
 
     this.airborne = true
 
+    // set other state
     xScroll = 0
-}
-
+  }
   moveLeft() {
     this.dx = 0 - (gridSize / 10)
   }
@@ -73,13 +73,13 @@ reset(){
       this.airborne = true
     }
 
-    /* Check for death of the hero */
-    if (this.y > canvas.height + gridSize){
+    // check for falling below the screen
+    if (this.y > canvas.height + gridSize) {
       this.reset()
     }
 
-
-    if (this.x > canvas.width / 2){
+    // check for scrolling the screen
+    if (this.x > canvas.width / 2) {
       xScroll = this.x - (canvas.width / 2)
     }
   }
@@ -88,10 +88,11 @@ reset(){
     // figure out which sprite to draw
     let image = heroStandSprite.image
     if (Math.abs(this.dx) > 0.1) {
-      //walking
-      image = heroWalkSprite1.image
-      let quadrant = Math.floor(this.x / (gridSize / 3))
-      if (quadrant % 2 === 0 ) {
+      // we know we're walking
+      let frame = Math.floor(this.x / (gridSize / 3))
+      if (frame % 2 === 0) {
+        image = heroWalkSprite1.image
+      } else {
         image = heroWalkSprite2.image
       }
     }
@@ -111,7 +112,11 @@ reset(){
     // draw our logical position
     ctx.fillStyle = 'black'
     ctx.beginPath()
-    ctx.arc(this.x - xScroll, this.y, 3, 0, 2*Math.PI, false)
+    ctx.arc(
+      this.x - xScroll,
+      this.y,
+      3, 0, 2*Math.PI, false
+    )
     ctx.fill()
   }
 }

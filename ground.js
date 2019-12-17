@@ -25,23 +25,22 @@ class Ground {
   }
 
   draw() {
-
-
-    for (let row = 0; row < this.height; row += gridSize){
+    for (let row = 0; row < this.height; row += gridSize) {
       let image = groundSprite.image
       if (row === 0) {
         image = groundTopSprite.image
       }
-      for (let column = 0; column < this.width; column += gridSize){
+      for (let column = 0; column < this.width; column += gridSize) {
         ctx.drawImage(
-        image,
-        this.x + column - xScroll,
-        this.y + row,
-        gridSize,
-        gridSize)
+          image,
+          this.x + column - xScroll,
+          this.y + row,
+          gridSize,
+          gridSize
+        )
       }
     }
-    
+
     ctx.strokeStyle = 'darkgreen'
     ctx.strokeRect(
       this.x - xScroll,
@@ -51,3 +50,16 @@ class Ground {
     )
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

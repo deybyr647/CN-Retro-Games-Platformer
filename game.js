@@ -1,4 +1,5 @@
-let xScroll = 0 
+
+let xScroll = 0
 let hero = new Hero()
 let world = [
   new Ground(2, 2, 18, 2),
